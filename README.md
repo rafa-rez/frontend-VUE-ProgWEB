@@ -76,3 +76,48 @@ O endpoint `/api/tccs/estatisticas/` retorna:
 Para visualização das informações acesse os endpoints, como o exemplo: [http://127.0.0.1:8000/api/](http://127.0.0.1:8000/api/).
 
 **Dica para o Frontend:** Lembre-se que para o upload de arquivos você não envia um JSON comum, mas sim um objeto `FormData`.
+
+## Front-end Vue
+
+O front-end foi implementado em Vue 3 com Vite e fica na pasta separada `frontend/`.
+Ele consome a API Django em `http://127.0.0.1:8000/api` por padrao.
+
+### Funcionalidades do front-end
+
+* Dashboard com estatisticas de TCCs usando o endpoint `/api/tccs/estatisticas/`.
+* Listagem e busca de Alunos, Professores, Cursos, Departamentos, Unidades Academicas e TCCs.
+* Cadastro de TCC com envio de arquivo PDF usando `multipart/form-data`.
+* Link para visualizacao/download do PDF na listagem de TCCs, quando houver arquivo cadastrado.
+* Alteracao do status do TCC pela interface.
+* Rodape com os autores: Mateus Mendes e Rafael Rezende.
+
+### Como executar o front-end
+
+Em um terminal, deixe o backend rodando:
+
+```bash
+python manage.py runserver
+```
+
+Em outro terminal, execute:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Depois acesse:
+
+```text
+http://127.0.0.1:5173/
+```
+
+Para gerar a versao de producao:
+
+```bash
+cd frontend
+npm run build
+```
+
+Caso seja necessario mudar a URL da API, copie `frontend/.env.example` para `frontend/.env` e altere a variavel `VITE_API_BASE_URL`.
