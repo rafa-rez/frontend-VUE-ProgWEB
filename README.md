@@ -121,3 +121,31 @@ npm run build
 ```
 
 Caso seja necessario mudar a URL da API, copie `frontend/.env.example` para `frontend/.env` e altere a variavel `VITE_API_BASE_URL`.
+
+## Executando com Docker
+
+Tambem e possivel subir backend e front-end com Docker Compose.
+
+No Docker, nao e necessario criar ou ativar `venv`: o isolamento ja acontece dentro do container.
+O backend executa automaticamente:
+
+* `pip install -r requirements.txt` durante o build da imagem.
+* `python manage.py makemigrations core` ao iniciar o container.
+* `python manage.py migrate` ao iniciar o container.
+* `python load.py` somente quando o banco estiver vazio.
+* `python manage.py runserver 0.0.0.0:8000` para iniciar a API.
+
+```bash
+docker compose up --build
+```
+
+Depois acesse:
+
+* Front-end Vue: `http://127.0.0.1:5173/`
+* API Django: `http://127.0.0.1:8000/api/`
+
+Para parar os containers:
+
+```bash
+docker compose down
+```
